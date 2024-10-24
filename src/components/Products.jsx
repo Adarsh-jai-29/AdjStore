@@ -1,26 +1,9 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
 
-const Products = () => {
+function Products() {
+  return (
+    <div>Products</div>
+  )
+}
 
-
-
-  return <Wrapper>
-    <div className="grid-filter-column">hii</div>
-  </Wrapper>;
-};
-
-const Wrapper = styled.section`
-  .grid-filter-column {
-    grid-template-columns: 0.2fr 1fr;
-    border 5px solid red;
-  }
-
-  @media (max-width: ${({ theme }) => theme.media.mobile}) {
-    .grid-filter-column {
-      grid-template-columns: 1fr;
-    }
-  }
-`;
-
-export default Products;
+export default Products

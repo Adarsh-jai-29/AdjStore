@@ -1,5 +1,3 @@
-import React from 'react'
-
 function reducer(state,action) {
 if(action.type=='data_loading'){
   return({
@@ -12,14 +10,24 @@ if(action.type=='data_loaded'){
   })
   
  return({
-  ...state,products : action.payload ,featureProducts : featureData, isLoading : false
+  ...state,products : action.payload ,featureProducts : featureData, isLoading : false,isError : true,
 })
 
 }
 if(action.type=='set_error'){
   return {
-    ...state,isError : false,
+    ...state,isError : true,
   }
+}
+if(action.type=='single_product_data_loading'){
+  return({
+    ...state, isSingleProductLoading : true,
+  })
+}
+if(action.type=='single_product_data_loaded'){
+  return({
+    ...state, isSingleProductLoading : false,singleProduct : action.payload
+  })
 }
 
   return (
@@ -29,5 +37,4 @@ if(action.type=='set_error'){
 }
 
 
-export {}
 export default reducer
