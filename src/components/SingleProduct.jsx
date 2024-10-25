@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import {AppContext, AppProvider} from "./context/ProductContext";
+import {AppContext} from "./context/ProductContext";
 import PageNavigation from "./PageNavigation";
 import {Container} from "./Container";
 import MyImage from "./MyImage";
@@ -24,6 +24,7 @@ import {MdSecurity} from 'react-icons/md'
   if (isSingleProductLoading) {
     return <div className="page_loading">Loading.....</div>;
   }
+console.log(singleProduct.image)
 
 return <Wrapper>
  <PageNavigation title = {singleProduct.name} />
@@ -31,7 +32,7 @@ return <Wrapper>
     <div className="grid grid-two-column">
       {/* product Images  */}
       <div className="product_images">
-        <MyImage  />
+      {singleProduct.image && <MyImage images={singleProduct.image} />}
       </div>
 
       {/* product data  */}
@@ -58,17 +59,17 @@ return <Wrapper>
 
           <div className="product-warranty-data">
             <TbReplace className="warranty-icon" />
-            <p>30 Days Replacement</p>
+            <p>7 Days Replacement</p>
           </div>
 
           <div className="product-warranty-data">
             <TbTruckDelivery className="warranty-icon" />
-            <p>Thapa Delivered </p>
+            <p>Adj Deliveres </p>
           </div>
 
           <div className="product-warranty-data">
             <MdSecurity className="warranty-icon" />
-            <p>2 Year Warranty </p>
+            <p>1 Year Warranty </p>
           </div>
         </div>
 
