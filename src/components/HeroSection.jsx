@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../styles/Button";
+import Product from "./Product";
 
 const HeroSection = ({myData}) => {
 
@@ -17,7 +18,7 @@ const HeroSection = ({myData}) => {
               atque temporibus veniam doloribus libero ad error omnis voluptates
               animi! Suscipit sapiente.
             </p>
-            <NavLink>
+            <NavLink to={'./Products'}>
               <Button>shop now</Button>
             </NavLink>
           </div>

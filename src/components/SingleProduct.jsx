@@ -8,6 +8,8 @@ import MyImage from "./MyImage";
 
 import {TbTruckDelivery,TbReplace} from 'react-icons/tb'
 import {MdSecurity} from 'react-icons/md'
+import StarRating from "./StarRating";
+import { AddToCart } from "./AddToCart";
 
  const SingleProduct = ()=>
   {
@@ -18,13 +20,12 @@ import {MdSecurity} from 'react-icons/md'
  const {getSingleProduct,API,singleProduct} = useContext(AppContext)
  const {isSingleProductLoading} = useContext(AppContext)
   useEffect(() => {
-    getSingleProduct(`${API}/${id}`);
+    getSingleProduct(`${API}/${id}`);  //let it see
   }, []);
 
   if (isSingleProductLoading) {
     return <div className="page_loading">Loading.....</div>;
   }
-console.log(singleProduct.image)
 
 return <Wrapper>
  <PageNavigation title = {singleProduct.name} />
@@ -38,7 +39,7 @@ return <Wrapper>
       {/* product data  */}
       <div className="product-data">
         <h2>{singleProduct.name}</h2>
-        <p>{singleProduct.stars}</p>
+        <StarRating reviews={singleProduct.reviews}   stars={singleProduct.stars} />
         <p>{singleProduct.reviews} reviews</p>
         <p className="product-data-price">
           MRP:
@@ -84,6 +85,7 @@ return <Wrapper>
           <p>
             Brand :<span> {singleProduct.company} </span>
           </p>
+          <AddToCart stock={singleProduct.stock} />
         </div>
       </div>
     </div>

@@ -1,11 +1,11 @@
 import React from "react";
 import Header from "./components/Header";
-import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./GlobalStyle";
 import { Outlet } from "react-router-dom";
 import Footer from "./components/Footer";
 import {  AppProvider } from "./components/context/ProductContext";
+import {  FilterProvider } from "./components/context/FilterContext";
 
 
 
@@ -39,6 +39,7 @@ const App = () => {
   return( 
   <>
   <AppProvider>
+<FilterProvider >
      <ThemeProvider theme={theme} >
   <GlobalStyle />
   <Header />
@@ -46,7 +47,8 @@ const App = () => {
     
     <Footer />
   </ThemeProvider>
-  </AppProvider>
+  </FilterProvider>
+    </AppProvider>
  
 
   </>)

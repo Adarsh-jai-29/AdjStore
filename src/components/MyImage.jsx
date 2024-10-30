@@ -3,19 +3,19 @@ import styled from "styled-components";
 
 function MyImage({ images }) {
   const [mainImage, setMainImage] = useState(images[0]);
-  console.log(images);
+  // console.log(images);
   return (
     <Wrapper>
       <div className="grid grid-four-column">
-        {images.map((curElm, index) => {
+        {images.map((curElm) => {
           return (
-            <figure>
+            <figure key={curElm.url}>
               <img 
               src={curElm.url} 
               alt={curElm.filename}
               className="box-image--style"
-              key={index}
-              onClick={() => setMainImage(curElm)} />
+              onClick={() => setMainImage(curElm)} /> 
+              {/* // u can set border on image , so they can indicate that this image is open. */}
             </figure>
           );
         })}
