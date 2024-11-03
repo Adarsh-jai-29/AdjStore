@@ -11,12 +11,14 @@ const Sort = () => {
       {/* 1st column  */}
       <div className="sorting-list--grid">
         <button
+        title='Grid View'
           className={gridView ? "active sort-btn" : "sort-btn"}
           onClick={setGridView}>
-          <BsFillGridFill className="icon" />
+          <BsFillGridFill  className="icon" />
         </button>
 
         <button
+          title='List View'
           className={!gridView ? "active sort-btn" : " sort-btn"}
           onClick={setListView}>
           <BsList className="icon" />
@@ -35,7 +37,7 @@ const Sort = () => {
             name="sort"
             id="sort"
             className="sort-selection--style"
-            onClick={sorting}>
+            onChange={sorting}>
             <option value="lowest">Price(lowest)</option>
             <option value="#" disabled></option>
             <option value="highest">Price(highest)</option>
