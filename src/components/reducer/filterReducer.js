@@ -1,7 +1,7 @@
 const filterReducer = (state,action)=>{
   if(action.type == 'all products loaded'){
     return {
-      ...state, allProducts:[...action.payload],
+      ...state, allProducts:[...action.payload], filteredProducts:[...action.payload],
     }
   }
 if(action.type == 'setGridView' ){
@@ -25,9 +25,8 @@ if(action.type == 'get sort value' ){
 
   if(action.type == 'sorting products' ){
  let sortProducts;
- const {allProducts} = state
-  const allProductCopy =  [...allProducts]
-//  console.log(allProducts)
+ const {filteredProducts} = state
+  const filteredProductsCopy = [...filteredProducts]
 
   const a = (a,b)=>{
     if (state.sortValue == 'lowest'){
@@ -43,14 +42,43 @@ if(action.type == 'get sort value' ){
   return b.name.localeCompare(a.name)
     }
   }
-  sortProducts = allProductCopy.sort(a)
+  sortProducts = filteredProductsCopy.sort(a)
  
-
   return{
     ...state, allProducts : sortProducts,
   }
   }
-  
+
+  if(action.type == 'get filter value' )
+  {
+ let {name,value} = action.payload
+ 
+  return {...state,filters:{...state.filters,[name]:value}}
+  }
+
+  if(action.type == 'update all products' )
+  {
+    const {filteredProducts} = state
+    let filteredProductsCopy = [...filteredProducts]
+    if(state.filters.text){
+      filteredProductsCopy = filteredProductsCopy.filter((elem)=>{
+     return elem.name.toLowerCase().includes(state.filters.text)
+    })
+  }
+
+  // Category filter
+    if(state.filters.category){
+      filteredProductsCopy = filteredProductsCopy.filter((elem)=>{
+     return elem.category === state.filters.category
+    })
+  }
+ return {
+...state,
+allProducts : filteredProductsCopy,
+
+ }
+
+  }
 }
 
 
