@@ -67,9 +67,15 @@ if(action.type == 'get sort value' ){
   }
 
   // Category filter
-    if(state.filters.category){
+    if(state.filters.category !='All'){
       filteredProductsCopy = filteredProductsCopy.filter((elem)=>{
      return elem.category === state.filters.category
+    })
+  }
+  // Category filter
+    if(state.filters.company !='All'){
+      filteredProductsCopy = filteredProductsCopy.filter((elem)=>{
+     return elem.company === state.filters.company
     })
   }
  return {

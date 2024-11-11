@@ -20,6 +20,7 @@ export default function FilterSection() {
  }
   // let access every field's data
   const onlyCategoryData = getUniqueData(filteredProducts,'category')  //filter by category
+  const onlyCompanyData = getUniqueData(filteredProducts,'company')  //filter by category
 console.log(onlyCategoryData)
 
 
@@ -56,8 +57,9 @@ console.log(onlyCategoryData)
       </div>
     </div>
 
-    {/* <div className="filter-company">
+    <div className="filter-company">
       <h3>Company</h3>
+      
 
       <form action="#">
         <select
@@ -65,7 +67,7 @@ console.log(onlyCategoryData)
           id="company"
           className="filter-company--select"
           onClick={updateFilterValue}>
-          {companyData.map((curElem, index) => {
+          {onlyCompanyData.map((curElem, index) => {
             return (
               <option key={index} value={curElem} name="company">
                 {curElem}
@@ -74,7 +76,7 @@ console.log(onlyCategoryData)
           })}
         </select>
       </form>
-    </div> */}
+    </div>
 
     {/* <div className="filter-colors colors">
       <h3>Colors</h3>

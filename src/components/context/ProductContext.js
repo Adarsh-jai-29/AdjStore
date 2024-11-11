@@ -24,7 +24,7 @@ export const AppProvider = ({ children }) => {
     try {
       const res = await axios.get(url);
       const products = await res.data;
-      console.log(products);
+      // console.log(products);
 
       dispatch({ type: "data_loaded", payload: products });
     } catch (error) {
@@ -36,7 +36,7 @@ export const AppProvider = ({ children }) => {
     try {
       const res = await axios.get(data);
       const product = await res.data;
-      console.log(product);
+      // console.log(product);
 
       dispatch({ type: "single_product_data_loaded", payload: product });
     } catch (error) {
