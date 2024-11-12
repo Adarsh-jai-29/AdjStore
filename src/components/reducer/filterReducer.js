@@ -1,7 +1,20 @@
 const filterReducer = (state,action)=>{
+
   if(action.type == 'all products loaded'){
+    const priceArray = action.payload.map((elem)=>
+      elem.price
+      )
+      console.log(priceArray)
+      // console.log(Math.max.apply(Math,priceArray))
+
+   const maxPrice = priceArray.reduce(
+        (prevVal,curVal)=>
+          Math.max(prevVal,curVal)
+        ,0)
+        console.log(maxPrice)
+
     return {
-      ...state, allProducts:[...action.payload], filteredProducts:[...action.payload],
+      ...state, allProducts:[...action.payload], filteredProducts:[...action.payload],filters:{...state.filters,maxPrice:maxPrice,price:maxPrice}
     }
   }
 if(action.type == 'setGridView' ){
@@ -51,8 +64,7 @@ if(action.type == 'get sort value' ){
 
   if(action.type == 'get filter value' )
   {
- let {name,value} = action.payload
- 
+ let {name,value} = action.payload 
   return {...state,filters:{...state.filters,[name]:value}}
   }
 
@@ -72,12 +84,19 @@ if(action.type == 'get sort value' ){
      return elem.category === state.filters.category
     })
   }
-  // Category filter
+  // Company filter
     if(state.filters.company !='All'){
       filteredProductsCopy = filteredProductsCopy.filter((elem)=>{
      return elem.company === state.filters.company
     })
   }
+   // Price filter  
+   if(state.filters.price){
+    const {filteredProducts} = state
+  const a = filteredProducts.filter(elem => elem.price <= state.filters.price)
+   return {...state,allProducts:a}
+  }
+  
  return {
 ...state,
 allProducts : filteredProductsCopy,

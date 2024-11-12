@@ -4,7 +4,7 @@ import { FilterContext } from './context/FilterContext';
 
 export default function FilterSection() {
 
- const {filters:{text,category},filteredProducts,updateFilterValue} = useContext(FilterContext)
+ const {filters:{text,category,price,minPrice,maxPrice},filteredProducts,updateFilterValue} = useContext(FilterContext)
 
   console.log(text,category,filteredProducts)
  
@@ -59,8 +59,6 @@ console.log(onlyCategoryData)
 
     <div className="filter-company">
       <h3>Company</h3>
-      
-
       <form action="#">
         <select
           name="company"
@@ -77,27 +75,21 @@ console.log(onlyCategoryData)
         </select>
       </form>
     </div>
-
-    {/* <div className="filter-colors colors">
-      <h3>Colors</h3>
-
-      <div className="filter-color-style">
-        {colorsData.map((curColor, index) => {
-          return (
-            <button
-              key={index}
-              type="button"
-              value={curColor}
-              name="color"
-              style={{ backgroundColor: curColor }}
-              className="btnStyle"
-              onClick={updateFilterValue}>
-              {color === curColor ? "" : null}
-            </button>
-          );
-        })}
+   
+   
+    <div className="filter_price">
+        <h3>Price</h3>
+        <h3>₹{price}</h3>
+        <input
+          type="range"
+          name="price"
+          min={minPrice}
+          max={maxPrice}
+          value={price}
+          onChange={updateFilterValue}
+        />
       </div>
-    </div> */}
+
   </Wrapper>
   )
 }
@@ -150,11 +142,6 @@ const Wrapper = styled.section`
     font-size: 1.6rem;
     color: ${({ theme }) => theme.colors.text};
     text-transform: capitalize;
-  }
-
-  .filter-color-style {
-    display: flex;
-    justify-content: center;
   }
 
   .color-all--style {
