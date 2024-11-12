@@ -83,6 +83,7 @@ console.log(onlyCategoryData)
         <input
           type="range"
           name="price"
+          step={maxPrice/1000}
           min={minPrice}
           max={maxPrice}
           value={price}

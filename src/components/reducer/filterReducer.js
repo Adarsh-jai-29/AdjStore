@@ -92,9 +92,8 @@ if(action.type == 'get sort value' ){
   }
    // Price filter  
    if(state.filters.price){
-    const {filteredProducts} = state
-  const a = filteredProducts.filter(elem => elem.price <= state.filters.price)
-   return {...state,allProducts:a}
+ filteredProductsCopy = filteredProductsCopy.filter(elem => {
+  return elem.price <= state.filters.price})
   }
   
  return {
