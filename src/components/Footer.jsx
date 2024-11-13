@@ -42,19 +42,19 @@ const Footer = () => {
               <h3>Follow Us</h3>
               <div className="footer-social--icons">
                 <div>
-                  <a href="#" target="_blank">
+                  <a href="#" target="_blank" rel="noreferrer" >
                   <FaDiscord className="icons" />
                   </a>
                 </div>
                 <div>
                   <a href="https://www.instagram.com/adarsh.dev_29/"
-                    target="_blank">
+                    target="_blank" rel="noreferrer" >
                   <FaInstagram className="icons"  />
                 </a></div>
                 <div>
                   <a
                     href="#"
-                    target="_blank">
+                    target="_blank" rel="noreferrer" >
                     <FaYoutube className="icons" />
                   </a>
                 </div>
