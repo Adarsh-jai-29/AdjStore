@@ -6,12 +6,10 @@ import CartAmountToggle from "./CartAmountToggle";
 
 export const AddToCart = ({ stock }) => {
   const [amount, setAmount] = useState(1);
-  // console.log(stock);
 
   const setIncrease = () => (amount < stock ? setAmount(amount + 1) : ""); // u can show error when user try to add extra  amount of item than ur stock(ie: <p>no stocks avaible</p>)
   const setDecrease = () => amount -  1 > 0 ? setAmount(amount - 1) : ''
 
-  // setAmount()
 
   return (
     <Wrapper>

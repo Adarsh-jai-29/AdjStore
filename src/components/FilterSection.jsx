@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components';
 import { FilterContext } from './context/FilterContext';
+import { Button } from '../styles/Button';
 
 export default function FilterSection() {
 
- const {filters:{text,category,price,minPrice,maxPrice},filteredProducts,updateFilterValue} = useContext(FilterContext)
+ const {filters:{text,category,price,minPrice,maxPrice},filteredProducts,updateFilterValue,clearFilters} = useContext(FilterContext)
 
   console.log(text,category,filteredProducts)
  
@@ -91,6 +92,11 @@ console.log(onlyCategoryData)
         />
       </div>
 
+      <div className="filter-clear">
+        <Button className="btn" onClick={clearFilters}>
+          Clear Filters
+        </Button>
+      </div>
   </Wrapper>
   )
 }

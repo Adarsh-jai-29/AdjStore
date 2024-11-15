@@ -1,6 +1,6 @@
 const filterReducer = (state,action)=>{
 
-  if(action.type == 'all products loaded'){
+  if(action.type === 'all products loaded'){
     const priceArray = action.payload.map((elem)=>
       elem.price
       )
@@ -17,18 +17,18 @@ const filterReducer = (state,action)=>{
       ...state, allProducts:[...action.payload], filteredProducts:[...action.payload],filters:{...state.filters,maxPrice:maxPrice,price:maxPrice}
     }
   }
-if(action.type == 'setGridView' ){
+if(action.type === 'setGridView' ){
    return {
     ...state, gridView : true
   }
 }
-if(action.type == 'setListView' ){
+if(action.type === 'setListView' ){
    return {
     ...state, gridView : false
   }
 }
 
-if(action.type == 'get sort value' ){
+if(action.type === 'get sort value' ){
   const SelectElement = document.getElementById('sort');
  const dropdownValue = SelectElement.options[SelectElement.selectedIndex].value;
    return {
@@ -36,39 +36,39 @@ if(action.type == 'get sort value' ){
   }
 }
 
-  if(action.type == 'sorting products' ){
+  if(action.type === 'sorting products' ){
  let sortProducts;
  const {filteredProducts} = state
   const filteredProductsCopy = [...filteredProducts]
 
   const a = (a,b)=>{
-    if (state.sortValue == 'lowest'){
+    if (state.sortValue === 'lowest'){
   return a.price - b.price
     }
-    if (state.sortValue == 'highest'){
+    if (state.sortValue === 'highest'){
   return b.price - a.price
     }
-    if (state.sortValue == 'a-z'){
+    if (state.sortValue === 'a-z'){
   return a.name.localeCompare(b.name)
     }
-    if (state.sortValue == 'z-a'){
+    if (state.sortValue === 'z-a'){
   return b.name.localeCompare(a.name)
     }
   }
   sortProducts = filteredProductsCopy.sort(a)
  
   return{
-    ...state, allProducts : sortProducts,
+    ...state, filteredProducts : sortProducts,
   }
   }
 
-  if(action.type == 'get filter value' )
+  if(action.type === 'get filter value' )
   {
  let {name,value} = action.payload 
   return {...state,filters:{...state.filters,[name]:value}}
   }
 
-  if(action.type == 'update all products' )
+  if(action.type === 'update all products' )
   {
     const {filteredProducts} = state
     let filteredProductsCopy = [...filteredProducts]
@@ -79,13 +79,13 @@ if(action.type == 'get sort value' ){
   }
 
   // Category filter
-    if(state.filters.category !='All'){
+    if(state.filters.category !=='All'){
       filteredProductsCopy = filteredProductsCopy.filter((elem)=>{
      return elem.category === state.filters.category
     })
   }
   // Company filter
-    if(state.filters.company !='All'){
+    if(state.filters.company !=='All'){
       filteredProductsCopy = filteredProductsCopy.filter((elem)=>{
      return elem.company === state.filters.company
     })
@@ -101,8 +101,26 @@ if(action.type == 'get sort value' ){
 allProducts : filteredProductsCopy,
 
  }
+  }
+
+  if(action.type==='clear all filters'){
+    console.log(state)
+    const {filters:{maxPrice}} = state
+    console.log(maxPrice)
+    return{
+      ...state,
+      filters:{...state.filters,
+        text:'',
+        category:'All',
+        company:'All',
+        price : maxPrice,}
+    }
 
   }
+
+
+
+
 }
 
 

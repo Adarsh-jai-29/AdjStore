@@ -53,8 +53,11 @@ const sorting = ()=>{
   // console.log(products)
   useEffect(()=>{
     dispatch({type:'update all products'})
-  },[state.filters])
+  },[state.filters,state.sortValue])
+  const clearFilters = ()=>{
+    return dispatch({type:'clear all filters' })
+  }
 
 
-return <FilterContext.Provider value={{...state,setGridView,setListView,sorting,updateFilterValue,}} >{children}</FilterContext.Provider>
+return <FilterContext.Provider value={{...state,setGridView,setListView,sorting,updateFilterValue,clearFilters}} >{children}</FilterContext.Provider>
 }
