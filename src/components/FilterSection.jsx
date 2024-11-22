@@ -1,90 +1,94 @@
-import React, { useContext } from 'react'
-import styled from 'styled-components';
-import { FilterContext } from './context/FilterContext';
-import { Button } from '../styles/Button';
+import React, { useContext } from "react";
+import styled from "styled-components";
+import { FilterContext } from "./context/FilterContext";
+import { Button } from "../styles/Button";
 
 export default function FilterSection() {
+  const {
+    filters: { text, category, price, minPrice, maxPrice },
+    filteredProducts,
+    updateFilterValue,
+    clearFilters,
+  } = useContext(FilterContext);
 
- const {filters:{text,category,price,minPrice,maxPrice},filteredProducts,updateFilterValue,clearFilters} = useContext(FilterContext)
+  console.log(text, category, filteredProducts);
 
-  console.log(text,category,filteredProducts)
- 
   //common function to get unique data of every filter
 
- const getUniqueData = (data,property)=>{
-  console.log(data)
- let newVal = data.map((elem)=>{
-   return elem[property]
-  })
-  console.log(newVal)
-  return ['All',...new Set(newVal)] 
- }
+  const getUniqueData = (data, property) => {
+    console.log(data);
+    let newVal = data.map((elem) => {
+      return elem[property];
+    });
+    console.log(newVal);
+    return ["All", ...new Set(newVal)];
+  };
   // let access every field's data
-  const onlyCategoryData = getUniqueData(filteredProducts,'category')  //filter by category
-  const onlyCompanyData = getUniqueData(filteredProducts,'company')  //filter by category
-console.log(onlyCategoryData)
-
+  const onlyCategoryData = getUniqueData(filteredProducts, "category"); //filter by category
+  const onlyCompanyData = getUniqueData(filteredProducts, "company"); //filter by category
+  console.log(onlyCategoryData);
 
   return (
     <Wrapper>
-    <div className="filter-search">
-      <form onSubmit={(e) => e.preventDefault()}>
-        <input
-          type="text"
-          name="text"
-          placeholder="Search"
-          value={text}
-          onChange={updateFilterValue}
-        />
-      </form>
-    </div>
-
-    <div className="filter-category">
-      <h3>Category</h3>
-      <div>
-        {onlyCategoryData.map((curElem, index) => {
-          return (
-            <button
-              key={index}
-              type="button"
-              name="category"
-              value={curElem}
-              className={curElem === category ? "active" : ""}
-              onClick={updateFilterValue}>
-              {curElem}
-            </button>
-          );
-        })}
+      <div className="filter-search">
+        <form onSubmit={(e) => e.preventDefault()}>
+          <input
+            type="text"
+            name="text"
+            placeholder="Search"
+            value={text}
+            onChange={updateFilterValue}
+          />
+        </form>
       </div>
-    </div>
 
-    <div className="filter-company">
-      <h3>Company</h3>
-      <form action="#">
-        <select
-          name="company"
-          id="company"
-          className="filter-company--select"
-          onClick={updateFilterValue}>
-          {onlyCompanyData.map((curElem, index) => {
+      <div className="filter-category">
+        <h3>Category</h3>
+        <div>
+          {onlyCategoryData.map((curElem, index) => {
             return (
-              <option key={index} value={curElem} name="company">
+              <button
+                key={index}
+                type="button"
+                name="category"
+                value={curElem}
+                className={curElem === category ? "active" : ""}
+                onClick={updateFilterValue}
+              >
                 {curElem}
-              </option>
+              </button>
             );
           })}
-        </select>
-      </form>
-    </div>
-   
-   
-    <div className="filter_price">
+        </div>
+      </div>
+
+      <div className="filter-company">
+        <h3>Company</h3>
+        <form action="#">
+          <select
+            name="company"
+            id="company"
+            className="filter-company--select"
+            onClick={updateFilterValue}
+          >
+            {onlyCompanyData.map((curElem, index) => {
+              return (
+                <option key={index} value={curElem} name="company">
+                  {curElem}
+                </option>
+              );
+            })}
+          </select>
+        </form>
+      </div>
+
+      <div className="filter_price">
         <h3>Price</h3>
         <h3>₹{price}</h3>
         <input
           type="range"
           name="price"
-          step={maxPrice/1000}
+          step={maxPrice / 1000}
           min={minPrice}
           max={maxPrice}
           value={price}
@@ -97,8 +101,8 @@ console.log(onlyCategoryData)
           Clear Filters
         </Button>
       </div>
-  </Wrapper>
-  )
+    </Wrapper>
+  );
 }
 
 const Wrapper = styled.section`
@@ -202,4 +206,3 @@ const Wrapper = styled.section`
     color: #000;
   }
 `;
-

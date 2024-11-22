@@ -85,7 +85,7 @@ return <Wrapper>
           <p>
             Brand :<span> {singleProduct.company} </span>
           </p>
-          <AddToCart stock={singleProduct.stock} />
+          <AddToCart stock={singleProduct.stock} product={singleProduct} />
         </div>
       </div>
     </div>

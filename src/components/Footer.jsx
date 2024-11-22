@@ -42,7 +42,7 @@ const Footer = () => {
               <h3>Follow Us</h3>
               <div className="footer-social--icons">
                 <div>
-                  <a href="#" target="_blank" rel="noreferrer" >
+                  <a href="./" target="_blank" rel="noreferrer" >
                   <FaDiscord className="icons" />
                   </a>
                 </div>
@@ -53,7 +53,7 @@ const Footer = () => {
                 </a></div>
                 <div>
                   <a
-                    href="#"
+                    href="./"
                     target="_blank" rel="noreferrer" >
                     <FaYoutube className="icons" />
                   </a>

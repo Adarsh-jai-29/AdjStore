@@ -6,6 +6,7 @@ import { Outlet } from "react-router-dom";
 import Footer from "./components/Footer";
 import {  AppProvider } from "./components/context/ProductContext";
 import {  FilterProvider } from "./components/context/FilterContext";
+import { CartProvider } from "./components/context/CartContext";
 
 
 
@@ -40,18 +41,19 @@ const App = () => {
   <>
   <AppProvider>
 <FilterProvider >
-     <ThemeProvider theme={theme} >
+<CartProvider>  
+  <ThemeProvider theme={theme} >
   <GlobalStyle />
   <Header />
     <Outlet />
     
     <Footer />
   </ThemeProvider>
+    </CartProvider>
   </FilterProvider>
     </AppProvider>
- 
-
-  </>)
+   
+     </>)
 };
 
 export default App;

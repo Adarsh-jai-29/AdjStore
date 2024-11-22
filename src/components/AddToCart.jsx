@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../styles/Button";
 import CartAmountToggle from "./CartAmountToggle";
+import { CartContext } from "./context/CartContext";
 
-export const AddToCart = ({ stock }) => {
+export const AddToCart = ({ stock,product }) => {
+const {addToCart} = useContext(CartContext)
+
   const [amount, setAmount] = useState(1);
-
   const setIncrease = () => (amount < stock ? setAmount(amount + 1) : ""); // u can show error when user try to add extra  amount of item than ur stock(ie: <p>no stocks avaible</p>)
   const setDecrease = () => amount -  1 > 0 ? setAmount(amount - 1) : ''
 
@@ -19,7 +21,7 @@ export const AddToCart = ({ stock }) => {
         setIncrease={setIncrease}
       />
 
-      <NavLink to="/cart">
+      <NavLink to="/cart" onClick={()=>addToCart(amount,product)} >
         <Button className="btn">Add To Cart</Button>
       </NavLink>
     </Wrapper>

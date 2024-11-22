@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { FilterContext } from './context/FilterContext'
-import Product from './Product'
 import GridView from './GridView'
 import styled from 'styled-components'
 import ListView from './ListView'
