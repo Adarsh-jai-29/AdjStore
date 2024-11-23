@@ -2,11 +2,12 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { CartContext } from "./context/CartContext";
 import CartItem from "./CartItem";
+import { Button } from "../styles/Button";
+import { NavLink } from "react-router-dom";
 
 const Cart = () => {
-  const {cartData} = useContext(CartContext)
- console.log(cartData)
-
+  const {cartData,clearCart} = useContext(CartContext)
+//  console.log(cartData)
   return   <Wrapper>
   <div className="container">
     <div className="cart_heading grid grid-five-column">
@@ -23,6 +24,12 @@ const Cart = () => {
         return <CartItem key={curElem.id} {...curElem} />;
       })}
     </div>
+    <hr />
+    <div className="grid cart-two-button">
+       <NavLink to='/Products' ><Button className="btn" >CONTINUE SHOPPING... </Button></NavLink>
+        <Button className="btn" onClick={clearCart} >
+          CLEAR CART
+        </Button></div>
   </div>
 </Wrapper>;
 };

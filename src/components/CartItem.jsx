@@ -8,8 +8,6 @@ function CartItem({ id, name, image, price, amount }) {
   const setIncrease = () => (stock < amount ? setStock(stock + 1) : ""); 
   const setDecrease = () => stock -  1 > 0 ? setStock(stock - 1) : ''
   const [stock, setStock] = useState(1);
-  console.log(stock)
-  console.log(amount)
   return (
     <div className="cart_heading grid grid-five-column">
     <div className="cart-image--name">
@@ -49,6 +47,7 @@ function CartItem({ id, name, image, price, amount }) {
       <FaTrash className="remove_icon" onClick={() => removeItem(id)} />
     </div>
   </div>
+  
   )
 }
 

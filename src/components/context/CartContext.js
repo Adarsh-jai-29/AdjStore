@@ -23,6 +23,8 @@ return dispatch({type:'add to cart',payload:{product,amount}})
   console.log(id)
   return  dispatch({type:'remove cart item', payload : id})}
 
+  const clearCart = ()=>dispatch({type:'clear cart all items'})
 
- return <CartContext.Provider value={{...state,addToCart,removeItem}} >{children}</CartContext.Provider>
+
+ return <CartContext.Provider value={{...state,addToCart,removeItem,clearCart}} >{children}</CartContext.Provider>
 }
