@@ -5,19 +5,45 @@ const cartReducer = (state, action) => {
         product: { name, price, image, stock, id },
         amount,
       } = action.payload;
-      let cartProductData = {
-        amount,
-        name,
-        price,
-        id,
-        image: image[0].url,
-        stock,
-      };
-      // console.log(cartProductData)
-      return {
-        ...state,
-        cartData: [...state.cartData, cartProductData],
-      };
+      const existingProduct = state.cartData.find(
+        (elem) => elem.id === id + name
+      );
+      if (existingProduct) {
+        let updatedProduct = state.cartData.map((elem) => {
+          if (elem.id === id + name) {
+            let newAmount = elem.amount + amount;
+          if(newAmount >= stock){
+           newAmount = stock
+          }
+            return {
+              ...elem,
+              amount: newAmount,
+          }
+        }
+          else{
+            return elem
+          }
+        });
+        return {
+          ...state,
+          cartData: [...updatedProduct],
+        };
+      } else {
+        let cartProductData = {
+          amount,
+          name,
+          price,
+          id: id + name,
+          image: image[0].url,
+          stock,
+        };
+
+        // console.log(cartProductData)
+        return {
+          ...state,
+          cartData: [...state.cartData, cartProductData],
+        };
+      }
 
     case "remove cart item":
       const revisedCartData = state.cartData.filter((elem) => {
@@ -30,10 +56,10 @@ const cartReducer = (state, action) => {
       };
 
     case "clear cart all items":
-     return {
-      ...state,
+      return {
+        ...state,
         cartData: [],
-     }
+      };
     default:
       return state;
   }

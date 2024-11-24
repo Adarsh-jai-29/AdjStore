@@ -5,9 +5,13 @@ import { CartContext } from './context/CartContext';
 
 function CartItem({ id, name, image, price, amount }) {
   const { removeItem } = useContext(CartContext);
-  const setIncrease = () => (stock < amount ? setStock(stock + 1) : ""); 
-  const setDecrease = () => stock -  1 > 0 ? setStock(stock - 1) : ''
-  const [stock, setStock] = useState(1);
+    const setDecrease = () => {
+      // amount > 1 ? setAmount(amount - 1) : setAmount(1);
+    };
+  
+    const setIncrease = () => {
+      // amount < stock ? setAmount(amount + 1) : setAmount(stock);
+    };
   return (
     <div className="cart_heading grid grid-five-column">
     <div className="cart-image--name">
@@ -30,7 +34,7 @@ function CartItem({ id, name, image, price, amount }) {
 
     {/* Quantity  */}
     <CartAmountToggle
-      amount={stock}
+      amount={amount}
       setDecrease={setDecrease}
       setIncrease={setIncrease}
     />
@@ -39,7 +43,7 @@ function CartItem({ id, name, image, price, amount }) {
     <div className="cart-hide">
       <p>
         {/* <FormatPrice price={price * amount} /> */}
-        ₹ {price*stock}
+        ₹ {price*amount}
       </p>
     </div>
 
