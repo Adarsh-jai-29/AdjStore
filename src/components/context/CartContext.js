@@ -15,8 +15,8 @@ const getCartData = function() {
 
 const InitialState = {
   cartData: getCartData(),
-  totalItems: "",
-  totalAmount: "",
+  totalQuantity: "",
+  totalPrice: "",
   shippingFee: 5000,
 };
 
@@ -33,15 +33,20 @@ export const CartProvider = ({ children }) => {
     return dispatch({ type: "remove cart item", payload: id });
   };
 
+  const setIncrease = (id)=>dispatch({type:'set increment',payload : id})
+  const setDecrease = (id)=>dispatch({type:'set decrement',payload : id})
+
   const clearCart = () => dispatch({ type: "clear cart all items" });
-  useEffect(
-    () => localStorage.setItem("myCartData", JSON.stringify(state.cartData)),
+  useEffect(() =>{
+    dispatch({ type: "Cart total items" })
+    localStorage.setItem("myCartData", JSON.stringify(state.cartData))
+  },
     [state.cartData]
   );
 
   return (
     <CartContext.Provider
-      value={{ ...state, addToCart, removeItem, clearCart }}
+      value={{ ...state, addToCart, removeItem, clearCart, setIncrease, setDecrease }}
     >
       {children}
     </CartContext.Provider>

@@ -7,6 +7,15 @@ import { NavLink } from "react-router-dom";
 
 const Cart = () => {
   const {cartData,clearCart} = useContext(CartContext)
+
+
+  if (cartData.length === 0) {
+    return (
+      <EmptyDiv>
+    <h3>No Item in Cart</h3>
+      </EmptyDiv>
+    );
+  }
 //  console.log(cartData)
   return   <Wrapper>
   <div className="container">
@@ -21,6 +30,7 @@ const Cart = () => {
 
     <div className="cart-item">
       {cartData.map((curElem) => {
+        console.log(curElem)
         return <CartItem key={curElem.id} {...curElem} />;
       })}
     </div>
@@ -33,7 +43,16 @@ const Cart = () => {
   </div>
 </Wrapper>;
 };
-
+const EmptyDiv = styled.div`
+  display: grid;
+  place-items: center;
+  height: 50vh;
+  h3 {
+    font-size: 4.2rem;
+    text-transform: capitalize;
+    font-weight: 300;
+  }
+`;
 const Wrapper = styled.section`
   padding: 9rem 0;
 

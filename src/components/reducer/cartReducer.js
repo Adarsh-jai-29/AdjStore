@@ -44,7 +44,45 @@ const cartReducer = (state, action) => {
           cartData: [...state.cartData, cartProductData],
         };
       }
+    case 'set decrement':
+  let updatedProduct = state.cartData.map(elem=>{
+    if (elem.id === action.payload ){
+      let decAmount = elem.amount - 1
+      if(decAmount<=1){
+        decAmount = 1
+      }
+      return {
+        ...elem,
+        amount: decAmount
+      }
+    }else{
+      return elem
+    }
+  });
+  return {
+    ...state,
+    cartData: updatedProduct, // Return the updated cart
+  };
 
+  case "set increment":
+    const incrementedCart = state.cartData.map((elem) => {
+      if (elem.id === action.payload) {
+        let incAmount = elem.amount + 1;
+        if (incAmount > elem.stock) {
+          incAmount = elem.stock; // Limit increment to stock availability
+        }
+        return {
+          ...elem,
+          amount: incAmount,
+        };
+      }
+      return elem; // Ensure the rest of the cart remains untouched
+    });
+    return {
+      ...state,
+      cartData: incrementedCart, // Return the updated cart
+    };
+  
     case "remove cart item":
       const revisedCartData = state.cartData.filter((elem) => {
         return elem.id !== action.payload;
@@ -60,6 +98,18 @@ const cartReducer = (state, action) => {
         ...state,
         cartData: [],
       };
+
+      case 'Cart total items' :
+    const totalItem =  state.cartData.reduce((accum,curVal)=>
+       accum+curVal.amount
+        ,0
+       )
+    return{
+      ...state,
+      totalQuantity : totalItem,
+    }
+
+
     default:
       return state;
   }
