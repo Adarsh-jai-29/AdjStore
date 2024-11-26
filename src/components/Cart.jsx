@@ -6,7 +6,7 @@ import { Button } from "../styles/Button";
 import { NavLink } from "react-router-dom";
 
 const Cart = () => {
-  const {cartData,clearCart} = useContext(CartContext)
+  const {cartData,clearCart,totalPrice} = useContext(CartContext)
 
 
   if (cartData.length === 0) {
@@ -17,7 +17,7 @@ const Cart = () => {
     );
   }
 //  console.log(cartData)
-  return   <Wrapper>
+  return <Wrapper>
   <div className="container">
     <div className="cart_heading grid grid-five-column">
       <p>Item</p>
@@ -40,8 +40,26 @@ const Cart = () => {
         <Button className="btn" onClick={clearCart} >
           CLEAR CART
         </Button></div>
-  </div>
-</Wrapper>;
+  {/* order total_amount */}
+  <div className="order-total--amount">
+          <div className="order-total--subdata">
+            <div>
+              <p>subtotal:</p>
+              <p>₹{totalPrice}</p>
+            </div>
+            <div>
+              <p>shipping fee: </p>
+              <p> ₹{totalPrice/100}</p>
+            </div>
+            <hr />
+            <div>
+              <p>order total:</p>
+              <p>₹{totalPrice + totalPrice/100}</p>
+            </div>
+           </div>
+          </div>
+          </div>
+</Wrapper>
 };
 const EmptyDiv = styled.div`
   display: grid;

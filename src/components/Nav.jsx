@@ -8,7 +8,7 @@ import { CartContext } from "./context/CartContext";
 
 const Nav = () => {
   const [menuIcon, setMenuIcon] = useState();
-  const {...state} = useContext(CartContext)
+  const {totalQuantity} = useContext(CartContext)
   return (
     <Wrapper>
       <div className={menuIcon ? "navbar active" : "navbar"}>
@@ -48,7 +48,7 @@ const Nav = () => {
           <li>
             <NavLink to="/cart" className="navbar-link cart-trolley--link">
               <FiShoppingCart className="cart-trolley" />
-              <span className="cart-total--item"> {state.totalQuantity} </span>
+              <span className="cart-total--item"> {totalQuantity} </span>
             </NavLink>
           </li>
         </ul>

@@ -16,7 +16,7 @@ const getCartData = function() {
 const InitialState = {
   cartData: getCartData(),
   totalQuantity: "",
-  totalPrice: "",
+  totalPrice: 1100,
   shippingFee: 5000,
 };
 
@@ -39,6 +39,7 @@ export const CartProvider = ({ children }) => {
   const clearCart = () => dispatch({ type: "clear cart all items" });
   useEffect(() =>{
     dispatch({ type: "Cart total items" })
+    dispatch({ type: "Cart total price" })
     localStorage.setItem("myCartData", JSON.stringify(state.cartData))
   },
     [state.cartData]
