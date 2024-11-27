@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import {  AppProvider } from "./components/context/ProductContext";
 import {  FilterProvider } from "./components/context/FilterContext";
 import { CartProvider } from "./components/context/CartContext";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 
 
@@ -39,6 +40,13 @@ const App = () => {
   
   return( 
   <>
+  <Auth0Provider
+      domain="dev-l6xebel13dnqu54x.us.auth0.com"
+      clientId="nJJ69O2gtqcJQcKnFntlmW45zFTUCriY"
+      authorizationParams={{
+        redirect_uri: window.location.origin
+      }}
+    >
   <AppProvider>
 <FilterProvider >
 <CartProvider>  
@@ -53,6 +61,7 @@ const App = () => {
   </FilterProvider>
     </AppProvider>
    
+    </Auth0Provider>,
      </>)
 };
 
