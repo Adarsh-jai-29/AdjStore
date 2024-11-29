@@ -176,5 +176,14 @@ input, textarea{
           grid-template-columns: 1fr;
         }
     }
+li header button{
+background-color : #6254F3;
+color : #FFF;
+padding : 5px;
+border: none;
+}
+li header div {
+scale : 1.6;
+}
 
 `;

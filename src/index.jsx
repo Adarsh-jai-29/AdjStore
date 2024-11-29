@@ -10,9 +10,15 @@ import Contact from "./components/Contact";
 import SingleProduct from "./components/SingleProduct";
 import Cart from "./components/Cart";
 import Home from "./components/Home";
+import { ClerkProvider } from '@clerk/clerk-react'
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
+const PUBLISHABLE_KEY = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY
+
+if (!PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key")
+}
 
 const router = createBrowserRouter([
   {
@@ -50,7 +56,9 @@ const router = createBrowserRouter([
   
 ]);
 
-root.render(<RouterProvider router={router} />);
+root.render(<ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+  <RouterProvider router={router} />
+</ClerkProvider>);
 
 
 
