@@ -26,7 +26,7 @@ const MainHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   position: relative;
-
+  box-shadow: 0px 3px 12px rgb(174 176 178);
   .logo {
     height: 8rem;
     border-radius : 45%;
