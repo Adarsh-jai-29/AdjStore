@@ -19,7 +19,7 @@ const Nav = () => {
           <li>
             <NavLink
               to="/"
-              className="navbar-link "
+              className={({isActive})=>isActive ? "navbar-link bg-navbar" : "navbar-link "}
               onClick={() => setMenuIcon(false)}>
               Home
             </NavLink>
@@ -27,7 +27,7 @@ const Nav = () => {
           <li>
             <NavLink
               to="/about"
-              className="navbar-link "
+              className={({isActive})=>isActive ? "navbar-link bg-navbar" : "navbar-link "}
               onClick={() => setMenuIcon(false)}>
               About
             </NavLink>
@@ -35,7 +35,7 @@ const Nav = () => {
           <li>
             <NavLink
               to="/products"
-              className="navbar-link "
+              className={({isActive})=>isActive ? "navbar-link bg-navbar" : "navbar-link "}
               onClick={() => setMenuIcon(false)}>
               Products
             </NavLink>
@@ -43,7 +43,7 @@ const Nav = () => {
           <li>
             <NavLink
               to="/contact"
-              className="navbar-link "
+              className={({isActive})=>isActive ? "navbar-link bg-navbar" : "navbar-link "}
               onClick={() => setMenuIcon(false)}>
               Contact
             </NavLink>
@@ -101,9 +101,15 @@ const Nav = () => {
         &:active {
           color: ${({ theme }) => theme.colors.helper};
         }
+
       }
     }
-
+    .bg-navbar{
+      background-color: ${({ theme }) => theme.colors.helper};
+      color: #fff;
+      border-radius: .75rem;
+      padding: 1.25rem ;
+    }
     .mobile-navbar-btn {
       display: none;
       background-color: transparent;
