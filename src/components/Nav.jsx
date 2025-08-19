@@ -6,7 +6,6 @@ import { CgMenu, CgClose } from "react-icons/cg";
 import { CartContext } from "./context/CartContext";
 // import { useAuth0 } from "@auth0/auth0-react";
 import { Button } from "../styles/Button";
-import ClerkComp from "./ClerkComp";
 
 
 const Nav = () => {
@@ -50,7 +49,11 @@ const Nav = () => {
           </li>
 
    <li>
-   <ClerkComp   />
+    <Button className="btn user-login ">
+      <NavLink to="/sign-up" className="navbar-link">       
+    Sign Up
+      </NavLink>
+    </Button>
    </li>
 
           <li>

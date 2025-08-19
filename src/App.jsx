@@ -7,18 +7,18 @@ import Footer from "./components/Footer";
 import {  AppProvider } from "./components/context/ProductContext";
 import {  FilterProvider } from "./components/context/FilterContext";
 import { CartProvider } from "./components/context/CartContext";
+import "./App.css"; 
 
 
 
 const App = () => {
   const theme = {
     colors: {
-      heading: "rgb(24 24 29)",
+      heading: "rgb(24 24 29)", 
       text: "rgba(29 ,29, 29, .8)",
       white: "#fff",
       black: " #212529",
       helper: "#8490ff",
-
       bg: "#F6F8FA",
       footer_bg: "#0a1435",
       btn: "rgb(98 84 243)",
@@ -55,5 +55,5 @@ const App = () => {
    
      </>)
 };
-
+   
 export default App;
