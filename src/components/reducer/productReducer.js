@@ -6,7 +6,7 @@ if(action.type==='data_loading'){
 }
 if(action.type==='data_loaded'){
    const featureData = action.payload.filter((elem)=>{
-    return elem.featured === true
+    return elem.featured
   })
   
  return({

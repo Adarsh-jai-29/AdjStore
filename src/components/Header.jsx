@@ -25,7 +25,9 @@ const MainHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
   box-shadow: 0px 3px 12px rgb(174 176 178);
   .logo {
     height: 8rem;

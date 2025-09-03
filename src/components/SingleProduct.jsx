@@ -20,7 +20,7 @@ import { AddToCart } from "./AddToCart";
  const {getSingleProduct,API,singleProduct} = useContext(AppContext)
  const {isSingleProductLoading} = useContext(AppContext)
   useEffect(() => {
-    getSingleProduct(`${API}/${id}`);  //let it see
+    getSingleProduct(`${API}/${id}`);  
   }, []);
 
   if (isSingleProductLoading) {
