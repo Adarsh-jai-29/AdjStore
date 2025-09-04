@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export default function SignUp() {
   return (
     <>
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="flex !mt-20 items-center justify-center min-h-screen bg-gray-100">
         <div>
           {/* Main Container */}
           <div className="w-full ">
@@ -145,12 +146,12 @@ export default function SignUp() {
               <div className="text-center ">
                 <p className=" text-2xl text-gray-600">
                   Already have an account?
-                  <a
-                    href="#"
+                  <NavLink
+                    to={"/login"}
                     className="text-indigo-600 hover:text-indigo-800 font-medium hover:underline transition-colors duration-200"
                   >
-                    Sign in
-                  </a>
+                    Log in
+                  </NavLink>
                 </p>
               </div>
             </div>

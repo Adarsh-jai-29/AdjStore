@@ -7,15 +7,14 @@ const HeroSection = ({myData}) => {
 
   return (
     <Wrapper>
-      <div className="container">
+      <div className="container !mt-20">
         <div className="grid grid-two-column">
           <div className="hero-section-data">
             <p className="intro-data">Welcome to </p>
             <h1> {myData.name} </h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
-              atque temporibus veniam doloribus libero ad error omnis voluptates
-              animi! Suscipit sapiente.
+              Enjoy exclusive deals, fast delivery, and hassle-free shopping – all in one place.
+Whether you’re looking for the latest trends or timeless essentials, we’ve got you covered.
             </p>
             <NavLink to={'./Products'}>
               <Button>shop now</Button>

@@ -34,7 +34,7 @@ const Nav = () => {
           <li>
             <NavLink
               to="/products"
-              className={({isActive})=>isActive ? "navbar-link bg-navbar" : "navbar-link "}
+              className={({isActive})=>isActive ? "navbar-link bg-navbar" : "navbar-link animate-bounce "}
               onClick={() => setMenuIcon(false)}>
               Products
             </NavLink>
@@ -85,7 +85,7 @@ const Nav = () => {
   const Wrapper = styled.nav`
     .navbar-lists {
       display: flex;
-      gap: 4.8rem;
+      gap: 2.4rem;
       align-items: center;
 
       .navbar-link {
@@ -100,9 +100,9 @@ const Nav = () => {
           transition: color 0.3s linear;
         }
 
-        &:hover,
-        &:active {
-          color: ${({ theme }) => theme.colors.helper};
+        &:hover{
+          
+        border-bottom: 2px solid ${({ theme }) => theme.colors.helper};
         }
 
       }
