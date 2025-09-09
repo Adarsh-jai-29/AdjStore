@@ -5,12 +5,22 @@ import { FiShoppingCart } from "react-icons/fi";
 import { CgMenu, CgClose } from "react-icons/cg";
 import { CartContext } from "./context/CartContext";
 // import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "./context/AuthContext";
 import { Button } from "../styles/Button";
+import { FaRegUserCircle,FaRegHeart } from "react-icons/fa";
+import { FiBox } from "react-icons/fi";
+import { BsBell } from "react-icons/bs";
+import { IoMdArrowDropdown, IoIosLogOut } from "react-icons/io";
+
 
 
 const Nav = () => {
   const [menuIcon, setMenuIcon] = useState();
   const {totalQuantity} = useContext(CartContext)
+  const { user } = useAuth()
+  
+  const [open, setOpen] = useState(false);
+  
   return (
     <Wrapper>
       <div className={menuIcon ? "navbar active" : "navbar"}>
@@ -49,15 +59,43 @@ const Nav = () => {
           </li>
 
    <li>
+   { user ? <div 
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      {/* Button */}
+      <NavLink to="/sign-up" className="navbar-link">
+        <div className="flex justify-around items-center gap-1 cursor-pointer hover:text-blue-600">
+          <FaRegUserCircle size={20} />
+          <span>{user?.firstName || "Account"}</span>
+          <IoMdArrowDropdown />
+        </div>
+      </NavLink>
+
+      {/* Dropdown */}
+      { open && (
+        <div className="absolute top-full w-72 bg-white shadow-lg rounded-lg  text-2xl z-50">
+          <ul className="flex flex-col p-4  text-gray-700 ">
+            <li className=" h-16 !pl-2 flex justify-start gap-2 items-center hover:bg-gray-100 cursor-pointer"><FaRegUserCircle  />My Profile</li>
+            <li className=" h-16 !pl-2  flex justify-start gap-2  items-center hover:bg-gray-100 cursor-pointer"><FiBox />Orders</li>
+            <li className=" h-16 !pl-2  flex justify-start gap-2  items-center hover:bg-gray-100 cursor-pointer"><FaRegHeart />Wishlist</li>
+            <li className=" h-16 !pl-2 flex justify-start gap-2  items-center hover:bg-gray-100 cursor-pointer"><BsBell />Notifications</li>
+            <li className=" h-16 !pl-2 flex justify-start gap-2  items-center hover:bg-gray-100 cursor-pointer"><IoIosLogOut />Logout</li>
+          </ul>
+        </div>      
+      )}
+    </div> :
     <Button className="btn user-login ">
       <NavLink to="/sign-up" className="navbar-link">       
     Sign Up
       </NavLink>
     </Button>
+    }
    </li>
 
           <li>
-            <NavLink to="/cart" className="navbar-link cart-trolley--link">
+            <NavLink to="/cart" className={({isActive})=>isActive ? "navbar-link cart-trolley--link  bg-navbar " : "navbar-link cart-trolley--link  " }>
               <FiShoppingCart className="cart-trolley" />
               <span className="cart-total--item"> {totalQuantity} </span>
             </NavLink>
@@ -96,7 +134,6 @@ const Nav = () => {
           font-size: 1.8rem;
           font-weight: 500;
           text-transform: uppercase;
-          color: ${({ theme }) => theme.colors.black};
           transition: color 0.3s linear;
         }
 

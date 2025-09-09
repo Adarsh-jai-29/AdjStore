@@ -1,10 +1,18 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useAuth } from "./context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+    
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
+  const {authAPI,login,setUser} = useAuth()
+  console.log(authAPI)
+
+  const navigate = useNavigate();
   // Validation
   const validateForm = () => {
     let newErrors = {};
@@ -34,8 +42,29 @@ export default function Login() {
     event.preventDefault();
     if (validateForm()) {
       console.log("Form submitted successfully:", { email, password });
-      alert("Login successful!");
-      // 🚀 Here you can call API -> /login
+ 
+     axios.post(authAPI+'/auth/login', { email, password },{ withCredentials:true})
+        .then(response => {
+          console.log("Login successful:", response.data);
+          setUser(response.data.user);
+          // navigate to dashboard or another page
+          navigate('/')  
+        })
+         .catch(error => {
+    console.error("There was an error logging in!", error);
+    if (error.response && error.response.data) {
+      if (error.response.data.field === "password") {
+        setErrors({ password: error.response.data.message });
+      } else if (error.response.data.field === "email") {
+        setErrors({ email: error.response.data.message });
+      } else {
+        setErrors({ general: error.response.data.message });
+      }
+    } else {
+      setErrors({ general: "Server not responding. Please try again." });
+    }
+  });  
+
     } else {
       console.log("Form has validation errors.");
     }
@@ -90,8 +119,15 @@ export default function Login() {
                   focus:scale-105 focus:shadow-lg hover:border-gray-300 hover:bg-white"
               />
               {errors.password && (
-                <p className="text-red-500 text-sm">{errors.password}</p>
+                <p className="text-red-500 text-sm">{errors.password || errors}</p>
               )}
+
+              {/* General backend error */}
+            {errors.general && (
+              <p className="text-red-500 text-center text-sm">
+                {errors.general}
+              </p>
+            )}
             </div>
 
             {/* Submit */}

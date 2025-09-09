@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -8,11 +9,12 @@ export default function SignUp() {
     email: "",
     password: "",
     confirmPassword: "",
-    mobileNo: "",
+    mobile: "",
     termsAccepted: false,
   });
   const [errors, setErrors] = useState({});
 
+  const authAPI = "http://localhost:3001" || process.env.REACT_APP_AUTH_API;
 
 
   const handelChange = (e) => {
@@ -41,7 +43,7 @@ export default function SignUp() {
     if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match";
     }
-    if (!formData.mobileNo) {
+    if (!formData.mobile) {
       newErrors.mobileNo = "Mobile number is required";
     } else if (!/^[0-9]{10}$/.test(formData.mobileNo)) {
       newErrors.mobileNo = "Enter a valid 10-digit mobile number";
@@ -61,6 +63,13 @@ export default function SignUp() {
     console.log("Form Submitted ✅", formData)
     }
     console.log(formData);
+    axios.post(authAPI+'/auth/sign-up', formData)
+    .then(response => {
+      console.log("Registration successful:", response.data);
+      // navigate to dashboard or another page
+      window.location.href = '/login';}).catch(error => {
+      console.error("There was an error registering!", error);
+    });
     
   }
 
@@ -184,8 +193,8 @@ export default function SignUp() {
                   </label>
                   <input
                     type="number"
-                    name="mobileNo"
-                    value={formData.mobileNo}
+                    name="mobile"
+                    value={formData.mobile}
                     onChange={(e) => handelChange(e)}
                     className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:bg-white transition-all duration-300 focus:scale-105 focus:shadow-lg hover:border-gray-300 hover:bg-white"
                   />

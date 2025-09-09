@@ -18,6 +18,8 @@ export const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const API = "https://api.pujakaitem.com/api/products";
+  // const authAPI = "http://localhost:3001" || process.env.REACT_APP_AUTH_API;
+
   
   const getProduct = async (url) => {
     dispatch({ type: "data_loading" });

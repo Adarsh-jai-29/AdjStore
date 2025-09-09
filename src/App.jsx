@@ -8,6 +8,7 @@ import {  AppProvider } from "./components/context/ProductContext";
 import {  FilterProvider } from "./components/context/FilterContext";
 import { CartProvider } from "./components/context/CartContext";
 import "./App.css"; 
+import { AuthProvider } from "./components/context/AuthContext";
 
 
 
