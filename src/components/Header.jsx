@@ -5,8 +5,6 @@ import Nav from "./Nav";
 // import { ProductContext } from "./context/ProductContext";
 
 const Header = () => {
-  // const[val] = useContext(ProductContext)
-  // console.log(val)
   return (
     <MainHeader>
       <NavLink to="/">

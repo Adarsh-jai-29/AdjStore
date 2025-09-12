@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useAuth } from "./context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Login() {
     
@@ -138,6 +138,18 @@ export default function Login() {
               Login
             </button>
           </form>
+           {/* Login Link */}
+                        <div className="text-center ">
+                          <p className="  text-gray-600">
+                           New on our platform?{" "}
+                            <NavLink
+                              to={"/sign-up"}
+                              className="text-indigo-600 hover:text-indigo-800 font-medium hover:underline transition-colors duration-200"
+                            >
+                              Sign Up
+                            </NavLink>
+                          </p>
+                        </div>
         </div>
       </div>
     </div>

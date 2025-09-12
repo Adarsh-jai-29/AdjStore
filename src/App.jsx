@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./components/Header";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./GlobalStyle";
@@ -8,7 +8,9 @@ import {  AppProvider } from "./components/context/ProductContext";
 import {  FilterProvider } from "./components/context/FilterContext";
 import { CartProvider } from "./components/context/CartContext";
 import "./App.css"; 
-import { AuthProvider } from "./components/context/AuthContext";
+import axios from "axios";
+import { useAuth } from "./components/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -36,6 +38,29 @@ const App = () => {
       tab: "998px",
     },
   };
+
+  const {authAPI, setUser} = useAuth()
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+       const fetchProfile = async () => {
+      try {
+        const res = await axios.get(authAPI + "/profile/view", {
+          withCredentials: true,
+        });
+        if (res && res.data?.user) {
+          setUser(res.data.user);
+        } else {
+          navigate("/login");
+        }
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+        navigate("/login");
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   
   return( 

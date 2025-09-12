@@ -6,7 +6,6 @@ const AuthContext = createContext({});
 const AuthProvider = (props) => {
   const [user, setUser] = useState(null);
 
- 
   const authAPI =  "http://localhost:3001" ;
 
   const authContextValue = {

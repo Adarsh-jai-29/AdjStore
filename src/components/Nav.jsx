@@ -11,16 +11,26 @@ import { FaRegUserCircle,FaRegHeart } from "react-icons/fa";
 import { FiBox } from "react-icons/fi";
 import { BsBell } from "react-icons/bs";
 import { IoMdArrowDropdown, IoIosLogOut } from "react-icons/io";
-
+import axios from "axios";
 
 
 const Nav = () => {
   const [menuIcon, setMenuIcon] = useState();
   const {totalQuantity} = useContext(CartContext)
-  const { user } = useAuth()
+  const { user, authAPI, setUser } = useAuth()
   
   const [open, setOpen] = useState(false);
   
+  const handleLogout = async(e)=>{
+    try{
+      const res = await axios.post(authAPI+'/auth/logout',{},{ withCredentials: true})
+      console.log(res)
+      setUser(null)
+    }
+    catch(err){
+      console.log('err', err)
+    }
+  }
   return (
     <Wrapper>
       <div className={menuIcon ? "navbar active" : "navbar"}>
@@ -65,23 +75,23 @@ const Nav = () => {
       onMouseLeave={() => setOpen(false)}
     >
       {/* Button */}
-      <NavLink to="/sign-up" className="navbar-link">
+      <button className="navbar-link" >
         <div className="flex justify-around items-center gap-1 cursor-pointer hover:text-blue-600">
           <FaRegUserCircle size={20} />
           <span>{user?.firstName || "Account"}</span>
-          <IoMdArrowDropdown />
+          <IoMdArrowDropdown className={open?'rotate-180 transition-all duration-500':''} />
         </div>
-      </NavLink>
+      </button>
 
       {/* Dropdown */}
       { open && (
         <div className="absolute top-full w-72 bg-white shadow-lg rounded-lg  text-2xl z-50">
           <ul className="flex flex-col p-4  text-gray-700 ">
-            <li className=" h-16 !pl-2 flex justify-start gap-2 items-center hover:bg-gray-100 cursor-pointer"><FaRegUserCircle  />My Profile</li>
-            <li className=" h-16 !pl-2  flex justify-start gap-2  items-center hover:bg-gray-100 cursor-pointer"><FiBox />Orders</li>
-            <li className=" h-16 !pl-2  flex justify-start gap-2  items-center hover:bg-gray-100 cursor-pointer"><FaRegHeart />Wishlist</li>
-            <li className=" h-16 !pl-2 flex justify-start gap-2  items-center hover:bg-gray-100 cursor-pointer"><BsBell />Notifications</li>
-            <li className=" h-16 !pl-2 flex justify-start gap-2  items-center hover:bg-gray-100 cursor-pointer"><IoIosLogOut />Logout</li>
+            <NavLink to={''}  className=" h-16 !pl-2 flex justify-start gap-2 items-center hover:bg-gray-100 cursor-pointer"><FaRegUserCircle  />My Profile</NavLink>
+            <NavLink to={''} className=" h-16 !pl-2  flex justify-start gap-2  items-center hover:bg-gray-100 cursor-pointer"><FiBox />Orders</NavLink>
+            <NavLink to={''} className=" h-16 !pl-2  flex justify-start gap-2  items-center hover:bg-gray-100 cursor-pointer"><FaRegHeart />Wishlist</NavLink>
+            <NavLink to={''} className=" h-16 !pl-2 flex justify-start gap-2  items-center hover:bg-gray-100 cursor-pointer"><BsBell />Notifications</NavLink>
+            <a onClick={(e)=>handleLogout()} className=" h-16 !pl-2 flex justify-start gap-2  items-center hover:bg-gray-100 cursor-pointer"><IoIosLogOut />Logout</a>
           </ul>
         </div>      
       )}
