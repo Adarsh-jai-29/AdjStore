@@ -6,7 +6,7 @@ const AuthContext = createContext({});
 const AuthProvider = (props) => {
   const [user, setUser] = useState(null);
 
-  const authAPI =  "http://localhost:3001" ;
+  const authAPI =  'https://adj-store-backend.vercel.app';
 
   const authContextValue = {
     

@@ -14,7 +14,7 @@ export default function SignUp() {
   });
   const [errors, setErrors] = useState({});
 
-  const authAPI = "http://localhost:3001" || process.env.REACT_APP_AUTH_API;
+  const authAPI = 'https://adj-store-backend.vercel.app'
 
 
   const handelChange = (e) => {
