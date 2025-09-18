@@ -42,25 +42,25 @@ const App = () => {
   const {authAPI, setUser} = useAuth()
   const navigate = useNavigate();
 
-  useEffect(()=>{
-       const fetchProfile = async () => {
-      try {
-        const res = await axios.get(authAPI + "/profile/view", {
-          withCredentials: true,
-        });
-        if (res && res.data?.user) {
-          setUser(res.data.user);
-        } else {
-          navigate("/login");
-        }
-      } catch (error) {
-        console.error("Error fetching profile:", error);
-        navigate("/login");
-      }
-    };
+  // useEffect(()=>{
+  //      const fetchProfile = async () => {
+  //     try {
+  //       const res = await axios.get(authAPI + "/profile/view", {
+  //         withCredentials: true,
+  //       });
+  //       if (res && res.data?.user) {
+  //         setUser(res.data.user);
+  //       } else {
+  //         navigate("/login");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching profile:", error);
+  //       navigate("/login");
+  //     }
+  //   };
 
-    fetchProfile();
-  }, []);
+  //   fetchProfile();
+  // }, []);
 
   
   return( 
